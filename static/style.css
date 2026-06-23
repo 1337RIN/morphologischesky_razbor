@@ -81,7 +81,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Флекс-контейнер для разобранных слов */
 .words-flex {
     display: flex;
     flex-wrap: wrap;
@@ -89,14 +88,12 @@ h2 {
     line-height: 2;
 }
 
-/* Флекс-контейнер для карточек слов */
 .words-flex {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Карточка каждого слова */
 .word-card {
     background: #f5f5f7;
     padding: 16px;
@@ -107,7 +104,6 @@ h2 {
     gap: 10px;
 }
 
-/* Блок разбора по морфемам */
 .morpheme-block {
     font-size: 22px;
     font-weight: 600;
@@ -115,13 +111,11 @@ h2 {
     align-items: flex-start;
 }
 
-/* Выделение основы */
 .stem {
     color: #0071e3;
     border-bottom: 3px solid #0071e3;
 }
 
-/* Выделение окончания */
 .ending {
     color: #34c759;
     border: 2px solid #34c759;
@@ -137,7 +131,6 @@ h2 {
     margin-left: 4px;
 }
 
-/* Блок подробной морфологии */
 .morph-info {
     font-size: 14px;
     color: #424245;
