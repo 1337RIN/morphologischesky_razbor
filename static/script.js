@@ -9,7 +9,6 @@ document.getElementById('analyze-btn').addEventListener('click', async () => {
     }
 
     try {
-        // Отправляем POST-запрос на наш Flask API
         const response = await fetch('/api/analyze', {
             method: 'POST',
             headers: {
@@ -22,15 +21,12 @@ document.getElementById('analyze-btn').addEventListener('click', async () => {
 
         const wordsData = await response.json();
         
-        // Очищаем контейнер перед выводом новых результатов
         container.innerHTML = '';
 
-        // Проходимся по каждому слову из ответа сервера
         wordsData.forEach(item => {
             const wordCard = document.createElement('div');
             wordCard.className = 'word-card';
 
-            // Контейнер для визуального разбора (основа + окончание)
             const morphemeBlock = document.createElement('div');
             morphemeBlock.className = 'morpheme-block';
 
@@ -42,7 +38,6 @@ document.getElementById('analyze-btn').addEventListener('click', async () => {
             }
             morphemeBlock.innerHTML = htmlContent;
 
-            // Контейнер для подробной морфологической информации
             const infoBlock = document.createElement('div');
             infoBlock.className = 'morph-info';
             infoBlock.innerHTML = `
@@ -51,13 +46,11 @@ document.getElementById('analyze-btn').addEventListener('click', async () => {
                 ${item.features ? `<div class="features"><b>Признаки:</b> ${item.features}</div>` : ''}
             `;
 
-            // Собираем всё в одну карточку
             wordCard.appendChild(morphemeBlock);
             wordCard.appendChild(infoBlock);
             container.appendChild(wordCard);
         });
 
-        // ВАЖНО: Делаем блок с результатами видимым!
         resultBox.style.display = 'block';
 
     } catch (error) {
@@ -66,7 +59,6 @@ document.getElementById('analyze-btn').addEventListener('click', async () => {
     }
 });
 
-// Массив с примерами предложений
 const placeholders = [
     "Быстрые кони весело бежали.",
     "Съешь ещё этих мягких французских булок, да выпей чаю.",
@@ -86,35 +78,27 @@ const placeholders = [
 const textarea = document.getElementById('sentence-input');
 let placeholderIndex = 0;
 
-// Функция для посимвольной печати плейсхолдера (эффект печатной машинки)
 function typePlaceholder(text, index = 0) {
-    // Если начали печатать новый текст, очищаем старый плейсхолдер
     if (index === 0) textarea.placeholder = "";
     
     if (index < text.length) {
         textarea.placeholder += text[index];
-        setTimeout(() => typePlaceholder(text, index + 1), 50); // Скорость печати одной буквы
+        setTimeout(() => typePlaceholder(text, index + 1), 50);
     } else {
-        // Ждем 3 секунды, когда текст полностью напечатается, и запускаем стирание
         setTimeout(erasePlaceholder, 3000);
     }
 }
 
-// Функция для посимвольного стирания плейсхолдера
 function erasePlaceholder() {
     const currentText = textarea.placeholder;
     if (currentText.length > 0) {
         textarea.placeholder = currentText.substring(0, currentText.length - 1);
-        setTimeout(erasePlaceholder, 30); // Скорость стирания букв
+        setTimeout(erasePlaceholder, 30);
     } else {
-        // Переходим к следующему тексту в массиве
         placeholderIndex = (placeholderIndex + 1) % placeholders.length;
-        // Запускаем печать следующего текста
         setTimeout(() => typePlaceholder(placeholders[placeholderIndex]), 500);
     }
 }
 
-// Запускаем анимацию при загрузке страницы
-// Сначала очищаем дефолтный плейсхолдер из HTML, если он там есть
 textarea.placeholder = "";
 setTimeout(() => typePlaceholder(placeholders[0]), 1000);
