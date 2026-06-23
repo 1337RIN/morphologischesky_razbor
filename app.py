@@ -1,5 +1,4 @@
 import os
-# Добавляем render_template в импорт из flask
 from flask import Flask, request, jsonify, render_template 
 from flask_cors import CORS 
 from main import analyze_sentence
@@ -7,7 +6,6 @@ from main import analyze_sentence
 app = Flask(__name__)
 CORS(app) 
 
-# ДОБАВЛЯЕМ ЭТОТ МАРШРУТ: он будет отдавать твою веб-страницу локально
 @app.route('/')
 def index():
     return render_template('index.html')
