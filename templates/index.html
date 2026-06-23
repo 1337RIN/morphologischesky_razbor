@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Морфологический Анализатор</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Морфологический разбор</h1>
+        <p class="subtitle">Практическая работа по выделению основ и окончаний</p>
+        
+        <div class="input-section">
+            <textarea id="sentence-input" placeholder="Введите предложение на русском языке... например: Быстрые кони весело бежали."></textarea>
+            <button id="analyze-btn">Аналозировать текст</button>
+        </div>
+
+        <div class="result-section" id="result-box" style="display: none;">
+            <h2>Результат анализа:</h2>
+            <div id="words-container" class="words-flex"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
