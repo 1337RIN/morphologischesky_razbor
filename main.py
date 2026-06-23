@@ -3,7 +3,6 @@ import re
 
 morph = pymorphy3.MorphAnalyzer()
 
-# Словари для перевода тегов pymorphy3 на русский язык
 POS_MAP = {
     'NOUN': 'Существительное', 'ADJF': 'Прилагательное (полное)', 'ADJS': 'Прилагательное (краткое)',
     'COMP': 'Компаратив', 'VERB': 'Глагол (личная форма)', 'INFN': 'Глагол (инфинитив)',
@@ -62,13 +61,10 @@ def analyze_sentence(sentence):
     for w in words:
         stem, ending, parsed = analyze_word_v2(w)
         
-        # Собираем читаемые характеристики
         features = []
         
-        # 1. Часть речи
         pos_ru = POS_MAP.get(parsed.tag.POS, str(parsed.tag.POS))
         
-        # 2. Постоянные и непостоянные признаки
         if parsed.tag.animacy:
             features.append(ANIMACY_MAP.get(parsed.tag.animacy))
         if parsed.tag.gender:
